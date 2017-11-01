@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="header text-center">
-            <h2>Tất cả bài viết</h2>
+            <h2><u>CATEGORY:</u> {{ $category->name }}</h2>
         </div>
         <div class="body">
         	@foreach($posts as $post)
@@ -27,13 +27,13 @@
                                 <h4 class="media-heading">{{ $post->title }}</h4>
                             </a>
                             <div class="media-post-info">
-                                <a href="{{ url('blog/categories/'.$post->category_id.'/'.$post->category_slug) }}" class="media-post-category">
-                                    <span class="label label-danger">{{ $post->category_name }}</span>
-                                </a>
-                                {{-- <a href="" class="media-post-author">
+                                {{-- <a href="{{ $post->category_slug }}" class="media-post-category"> --}}
+                                   {{--  <span class="label label-danger">{{ $post->category_name }}</span> --}}
+                                {{-- </a> --}}
+                                <a href="" class="media-post-author">
                                      <span class="label label-danger">Tác giả: </span>
                                     {{ $post->author }}
-                                </a> --}}
+                                </a>
                             </div>
                             <div class="media-post-description">
                                 {{ \Illuminate\Support\Str::words($post->description , 20, ' ...') }}

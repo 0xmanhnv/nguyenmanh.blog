@@ -177,6 +177,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * facebook sdk
+         */
+        SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
+
     ],
 
     /*
@@ -226,6 +231,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        /**
+         * facebook sdk
+         */
+        'Facebook' => SammyK\LaravelFacebookSdk\FacebookFacade::class,
     ],
 
 ];

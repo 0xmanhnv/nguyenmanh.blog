@@ -9,6 +9,10 @@ use App\Models\Category;
 
 class BlogController extends Controller
 {
+	/**
+	 * show index
+	 * @return [type] [description]
+	 */
     public function index(){
     	/**
     	 * get post status = 1
@@ -17,7 +21,8 @@ class BlogController extends Controller
     	 */
     	$posts 	= Post::where('posts.status','=', 1)
     			->join('categories', 'category_id', '=', 'categories.id')
-    			->select('posts.*', 'categories.name as category_name', 'categories.slug as category_slug')
+    			->join('users', 'user_id', '=', 'users.id')
+    			->select('posts.*', 'categories.name as category_name', 'categories.slug as category_slug', 'users.user_name as author')
     			->paginate(15);
 
     	$categories = Category::where('status', '=', 1)->get();
@@ -26,6 +31,21 @@ class BlogController extends Controller
 
     	return view('blog.index',[
     		'posts' => $posts,
+    		'categories' => $categories,
     	]);
     }
+
+    /**
+     * show categories
+     * @return [type] [description]
+     */
+    public function categories(){
+    	$categories = Category::where('status', '=', 1)->paginate(15);
+
+    	// dd($categories);
+    	return view('blog.categories.index', [
+    		'categories' => $categories,
+    	]);
+    }
+
 }
