@@ -3,10 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Post;
 
 class Category extends Model
 {
     protected $fillable =[
     	'id', 'name', 'slug', 'description', 'thumbnail'
     ];
+
+    public function posts(){
+    	return $this->hasMany(Post::class);
+    }
 }

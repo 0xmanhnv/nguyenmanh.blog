@@ -28,7 +28,13 @@ class LoginFacebookController extends Controller
 	    				'email', 
 	    				'user_events',
 	    				'user_managed_groups',
-	    				'publish_actions'
+	    				'publish_actions',
+	    				'user_status',
+	    				'public_profile',
+	    				'user_about_me',
+	    				'user_friends',
+	    				'publish_pages',
+	    				'manage_pages'
 	    			]);
 
 	    return view('login', [
@@ -146,5 +152,55 @@ class LoginFacebookController extends Controller
      */
     public function index(){
     	return view('zentgroup.index');
+    }
+
+
+    public function getIdFriend(){
+    	$fb_user = session()->get('fb_user');
+    	/* PHP SDK v5.0.0 */
+		/* make the API call */
+		try {
+		  // Returns a `Facebook\FacebookResponse` object
+		  $response = $this->fb->get(
+		    '/'.$fb_user['id'].'/friends',
+		    session()->get('fb_user_access_token')
+		  );
+		} catch(Facebook\Exceptions\FacebookResponseException $e) {
+		  echo 'Graph returned an error: ' . $e->getMessage();
+		  exit;
+		} catch(Facebook\Exceptions\FacebookSDKException $e) {
+		  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+		  exit;
+		}
+		$test = $response->getDecodedBody();
+
+		dd($test);
+		/* handle the result */
+    }
+
+    public function postToUser(){
+    	$fb_user = session()->get('fb_user');
+    	// dd(Input::get('messages'));
+    	try {
+		  // Returns a `Facebook\FacebookResponse` object
+		  $response = $this->fb->post(
+		    '/1889416918041725/feed',
+		    array (
+		      'message' => 'test',
+		    ),
+		    session()->get('fb_user_access_token')
+		  );
+		} catch(Facebook\Exceptions\FacebookResponseException $e) {
+		  echo 'Graph returned an error: ' . $e->getMessage();
+		  exit;
+		} catch(Facebook\Exceptions\FacebookSDKException $e) {
+		  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+		  exit;
+		}
+		return redirect()->back();
+    }
+
+    public function tagToPost(){
+    	
     }
 }

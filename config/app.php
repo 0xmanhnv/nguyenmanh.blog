@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'vi',
 
     /*
     |--------------------------------------------------------------------------
@@ -181,6 +181,15 @@ return [
          * facebook sdk
          */
         SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
+        /**
+         * Datatable 
+         */
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
+        /**
+         * debugbar
+         */
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
@@ -235,6 +244,15 @@ return [
          * facebook sdk
          */
         'Facebook' => SammyK\LaravelFacebookSdk\FacebookFacade::class,
+        /**
+         * datatables
+         */
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+
+        /**
+         * debugbar
+         */
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
