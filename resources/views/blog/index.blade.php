@@ -1,5 +1,8 @@
 @extends('blog.layouts.master')
 
+@section('title')
+    {{ "Nguyễn Mạnh" }}
+@endsection
 
 @section('content')
     <div class="col-xs-12 col-sm-8 col-md-8">
@@ -15,7 +18,7 @@
                                     </a>
                                 </div>
                                 <div class="postMetaInline-feedSummary">
-                                    <a class="link link--darken link--accent u-accentColor--textNormal u-accentColor--textDarken u-color--link user-link" href="{{ url('blog/user/'.$post->user_id) }}">
+                                    <a class="link link--darken link--accent u-accentColor--textNormal u-accentColor--textDarken u-color--link user-link" href="{{ route('blog.author',[$post->user_id ]) }}">
                                         {{ $post->author }}
                                     </a>
                                     <span class="POSTMETAINLINE postMetaInline--supplemental">
@@ -31,12 +34,12 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <a href="{{ url('blog/'.$post->id.'/'.$post->slug) }}">
+                        <a href="{{ route('blog.post',[$post->id,$post->slug]) }}">
                             <h3 class="title">{{ $post->title }}</h3>
                         </a>
                         <span>
                             {{ \Illuminate\Support\Str::words($post->description , 30, ' ...') }}
-                            <a class="see-more" href="{{ url('blog/'.$post->id.'/'.$post->slug) }}"> Xem thêm</a>
+                            <a class="see-more" href="{{ route('blog.post',[$post->id,$post->slug]) }}"> Xem thêm</a>
                         </span>
                     </div>
                 </article>
@@ -47,6 +50,13 @@
         @endif
     </div>
     <div class="col-xs-12 col-sm-4 col-md-4">
+        {{-- facebook page --}}
+        <div class="panel panel-custome">
+            <div class="panel-body panel-body-custome panel-body-facebook">
+                <div class="fb-page" data-href="https://www.facebook.com/tailieucntt/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/tailieucntt/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/tailieucntt/">Tài liệu chuyên nghành Công Nghệ Thông Tin</a></blockquote></div>
+            </div>
+        </div>
+        {{-- end facebook page --}}
         {{-- categories --}}
          @if(isset($categories))
             <div class="panel panel-custome">
@@ -94,11 +104,7 @@
                 </div>
             </div>
         @endif
-        {{-- end tags --}}
-
-        {{-- add widgets --}}
-        @yield('widgets')
-        {{-- end add widgets --}}
+        {{-- end tags --}} 
     </div>
 @endsection
 

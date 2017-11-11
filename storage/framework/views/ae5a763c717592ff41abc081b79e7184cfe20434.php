@@ -1,3 +1,8 @@
+<?php $__env->startSection('title'); ?>
+    <?php echo e("category || " . $category->name); ?>
+
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
     <div class="col-xs-12 col-sm-8 col-md-8">
         <div class="row well text-center "><h3>Category: <strong><?php echo e($category->name); ?></strong></h3></div>
@@ -26,13 +31,13 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <a href="<?php echo e(url('blog/'.$post->id.'/'.$post->slug)); ?>">
+                        <a href="<?php echo e(route('blog.post',[$post->id,$post->slug])); ?>">
                             <h3 class="title"><?php echo e($post->title); ?></h3>
                         </a>
                         <span>
                             <?php echo e(\Illuminate\Support\Str::words($post->description , 30, ' ...')); ?>
 
-                            <a href="<?php echo e(url('blog/'.$post->id.'/'.$post->slug)); ?>"> Xem thêm</a>
+                            <a href="<?php echo e(route('blog.post',[$post->id,$post->slug])); ?>"> Xem thêm</a>
                         </span>
                     </div>
                 </article>

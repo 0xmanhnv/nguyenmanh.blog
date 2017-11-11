@@ -1,11 +1,15 @@
 @extends('blog.layouts.master')
 
+@section('title')
+    {{ "Tag || ". $tag->name }}
+@endsection
+
 
 @section('content')
     <div class="col-xs-12 col-sm-8 col-md-8">
-        <div class="row well text-center "><h3>Tag: </h3></div>
-        @if(isset($posts))
-            @foreach ($posts as $post)
+        <div class="row well text-center "><h3>Tag: <strong>{{ $tag->name }}</strong></h3></div>
+        @if(isset($tag->posts))
+            @foreach ($tag->posts as $post)
                 <article class="row article">
                     <div class="col-xs-12">
                         <div class="block-postMeta postMeta-previewHeader">
@@ -16,7 +20,7 @@
                                     </a>
                                 </div>
                                 <div class="postMetaInline-feedSummary">
-                                    <a class="link link link--darken link--accent u-accentColor--textNormal u-accentColor--textDarken u-color--link" href="#">
+                                    <a class="link link link--darken link--accent u-accentColor--textNormal u-accentColor--textDarken u-color--link" href="{{ route('blog.author',[$post->author->id]) }}">
                                         {{ $post->author->user_name }}
                                     </a>
                                     <span class="POSTMETAINLINE postMetaInline--supplemental">
@@ -27,18 +31,18 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <a href="{{ url('blog/'.$post->id.'/'.$post->slug) }}">
+                        <a href="{{ route('blog.post',[$post->id,$post->slug]) }}">
                             <h3 class="title">{{  $post->title }}</h3>
                         </a>
                         <span>
                             {{  $post->description }}
-                            <a href="{{ url('blog/'.$post->id.'/'.$post->slug) }}"> Xem thêm</a>
+                            <a href="{{ route('blog.post',[$post->id,$post->slug]) }}"> Xem thêm</a>
                         </span>
                     </div>
                 </article>
             @endforeach
             <div class="text-center">
-                {{ $posts->links() }}
+                
             </div>
         @endif
     </div>

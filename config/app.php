@@ -191,6 +191,11 @@ return [
          */
         Barryvdh\Debugbar\ServiceProvider::class,
 
+        /**
+         * form
+         */
+        'Collective\Html\HtmlServiceProvider',
+
     ],
 
     /*
@@ -253,6 +258,13 @@ return [
          * debugbar
          */
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
+        /**
+         * form html
+         */
+        'Form' => 'Collective\Html\FormFacade',
+        'Html' => 'Collective\Html\HtmlFacade',
+
     ],
 
 ];

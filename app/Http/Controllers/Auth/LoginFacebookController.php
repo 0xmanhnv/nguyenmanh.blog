@@ -11,10 +11,23 @@ use Illuminate\Support\Facades\Input;
 class LoginFacebookController extends Controller
 {
 	private $fb;
+	private $params;
 
 	public function __construct(LaravelFacebookSdk $fb)
 	{
 		$this->fb = $fb;
+		$this->params = [
+			'email', 
+			'user_events',
+			'user_managed_groups',
+			'publish_actions',
+			'user_status',
+			'public_profile',
+			'user_about_me',
+			'user_friends',
+			'publish_pages',
+			'manage_pages'
+		];
 	}
 	/**
 	 * [login description]
@@ -24,18 +37,7 @@ class LoginFacebookController extends Controller
     	// Send an array of permissions to request
 	    $login_url = $this->fb
 	    			->getRedirectLoginHelper()
-	    			->getLoginUrl('http://127.0.0.1:8000/facebook/callback',[
-	    				'email', 
-	    				'user_events',
-	    				'user_managed_groups',
-	    				'publish_actions',
-	    				'user_status',
-	    				'public_profile',
-	    				'user_about_me',
-	    				'user_friends',
-	    				'publish_pages',
-	    				'manage_pages'
-	    			]);
+	    			->getLoginUrl('http://127.0.0.1:8000/facebook/callback',$this->prams);
 
 	    return view('login', [
 	    	'login_fb_url' =>$login_url,

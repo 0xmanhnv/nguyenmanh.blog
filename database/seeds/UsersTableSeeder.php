@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
 
     	for ($i=0; $i < 10; $i++) { 
 	        User::create([
-	        	'user_name' => str_random(10),
+	        	'name' => str_random(10),
 	            'email' => str_random(10).'@gmail.com',
 	            'password' => bcrypt('secret'),
 	        ]);

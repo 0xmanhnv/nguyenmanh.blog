@@ -28,13 +28,14 @@
     24 => 'SammyK\\LaravelFacebookSdk\\LaravelFacebookSdkServiceProvider',
     25 => 'Yajra\\DataTables\\DataTablesServiceProvider',
     26 => 'Barryvdh\\Debugbar\\ServiceProvider',
-    27 => 'App\\Providers\\AppServiceProvider',
-    28 => 'App\\Providers\\AuthServiceProvider',
-    29 => 'App\\Providers\\EventServiceProvider',
-    30 => 'App\\Providers\\RouteServiceProvider',
-    31 => 'SammyK\\LaravelFacebookSdk\\LaravelFacebookSdkServiceProvider',
-    32 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    33 => 'Barryvdh\\Debugbar\\ServiceProvider',
+    27 => 'Collective\\Html\\HtmlServiceProvider',
+    28 => 'App\\Providers\\AppServiceProvider',
+    29 => 'App\\Providers\\AuthServiceProvider',
+    30 => 'App\\Providers\\EventServiceProvider',
+    31 => 'App\\Providers\\RouteServiceProvider',
+    32 => 'SammyK\\LaravelFacebookSdk\\LaravelFacebookSdkServiceProvider',
+    33 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    34 => 'Barryvdh\\Debugbar\\ServiceProvider',
   ),
   'eager' => 
   array (
@@ -158,6 +159,10 @@
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
     'SammyK\\LaravelFacebookSdk\\LaravelFacebookSdk' => 'SammyK\\LaravelFacebookSdk\\LaravelFacebookSdkServiceProvider',
+    'html' => 'Collective\\Html\\HtmlServiceProvider',
+    'form' => 'Collective\\Html\\HtmlServiceProvider',
+    'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
+    'Collective\\Html\\FormBuilder' => 'Collective\\Html\\HtmlServiceProvider',
   ),
   'when' => 
   array (
@@ -201,6 +206,9 @@
     array (
     ),
     'SammyK\\LaravelFacebookSdk\\LaravelFacebookSdkServiceProvider' => 
+    array (
+    ),
+    'Collective\\Html\\HtmlServiceProvider' => 
     array (
     ),
   ),

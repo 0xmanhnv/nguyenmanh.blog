@@ -1,5 +1,8 @@
 @extends('blog.layouts.master')
 
+@section('title')
+    {{ "category || " . $category->name }}
+@endsection
 
 @section('content')
     <div class="col-xs-12 col-sm-8 col-md-8">
@@ -27,12 +30,12 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <a href="{{ url('blog/'.$post->id.'/'.$post->slug) }}">
+                        <a href="{{ route('blog.post',[$post->id,$post->slug]) }}">
                             <h3 class="title">{{ $post->title }}</h3>
                         </a>
                         <span>
                             {{ \Illuminate\Support\Str::words($post->description , 30, ' ...') }}
-                            <a href="{{ url('blog/'.$post->id.'/'.$post->slug) }}"> Xem thêm</a>
+                            <a href="{{ route('blog.post',[$post->id,$post->slug]) }}"> Xem thêm</a>
                         </span>
                     </div>
                 </article>

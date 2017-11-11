@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
+use App\Models\Category;
+use App\Models\Tag;
+use View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +21,6 @@ class AppServiceProvider extends ServiceProvider
          * carbon
          */
         Carbon::setLocale(config('app.locale'));
-
 
     }
 

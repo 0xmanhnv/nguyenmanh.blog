@@ -10,15 +10,21 @@ use App\User;
 use App\Models\Tag;
 use DB;
 use Input;
+use View;
+
 class BlogController extends Controller
 {
-    private $categories;
-    private $tags;
 
     public function __construct()
     {
-        $this->categories = Category::where('status', 1)->get();
-        $this->tags = Tag::where('status', 1)->get();
+        /**
+         * share categories
+         */
+        View::share('categories', Category::where('status', 1)->get());
+        /**
+         * share tags
+         */
+        View::share('tags', Tag::where('status', 1)->get());   
     }
 	/**
 	 * show index
@@ -33,41 +39,14 @@ class BlogController extends Controller
     	$posts 	= Post::where('posts.status','=', 1)
     			->join('categories', 'category_id', '=', 'categories.id')
     			->join('users', 'user_id', '=', 'users.id')
-    			->select('posts.*', 'categories.name as category_name', 'categories.slug as category_slug', 'users.user_name as author')
+    			->select('posts.*', 'categories.name as category_name', 'categories.slug as category_slug', 'users.name as author')
     			->paginate(15);
 
     
         
     	return view('blog.index',[
     		'posts' => $posts,
-    		'categories' => $this->categories,
-            'tags' => $this->tags
     	]);
-    }
-
-
-    /**
-     * Search post
-     * @param  Request $request [description]
-     * @return [type]           [description]
-     */
-    public function search(Request $request){
-        $tuKhoa =  $request->Input('q');
-
-
-        $posts = Post::where('status', 1)
-                    ->where(function($query) use ($tuKhoa) {
-                        return $query->where('title', 'like', "%$tuKhoa%")
-                                    ->orWhere('description', 'like', "%$tuKhoa%");
-                    })
-                    ->take(30)
-                    ->paginate(5);
-        $posts->setPath('?q='.$tuKhoa);
-
-        return view('blog.search', [
-            'posts' => $posts,
-            'tuKhoa' =>$tuKhoa
-        ]);
     }
 
     /**
@@ -75,13 +54,41 @@ class BlogController extends Controller
      * @return [type] [description]
      */
     public function categories(){
-    	$categories = Category::where('status', '=', 1)->paginate(15);
+        $categories = Category::where('status', '=', 1)->paginate(15);
 
-    	// dd($categories);
-    	return view('blog.categories.index', [
-    		'categories' => $categories,
-            'tags' => $this->tags
-    	]);
+        // dd($categories);
+        return view('blog.categories.index');
+    }
+
+
+
+    /**
+     * Search post
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function showResultSearch(Request $request){
+        $tuKhoa =  $request->Input('q');
+
+        if($tuKhoa != ""){
+            $posts = Post::where('status', 1)
+                        ->where(function($query) use ($tuKhoa) {
+                            return $query->where('title', 'like', "%$tuKhoa%")
+                                        ->orWhere('description', 'like', "%$tuKhoa%");
+                        })
+                        ->take(30)
+                        ->paginate(5);
+            $posts->setPath('?q='.$tuKhoa);
+
+            return view('blog.search', [
+                'posts' => $posts,
+                'tuKhoa' =>$tuKhoa
+            ]);
+        }else{
+            return view('blog.search',[
+            'tuKhoa' => $tuKhoa
+            ]);
+        }
     }
 
     /**
@@ -90,7 +97,7 @@ class BlogController extends Controller
      * @param  [type] $id   [description]
      * @return [type]       [description]
      */
-    public function post($id, $slug){
+    public function showDetailPost($id, $slug){
         $post = Post::where(
                 'id', '=', $id,
                 'and', 
@@ -101,10 +108,9 @@ class BlogController extends Controller
                 ->get()
                 ->first();
         
+
         return view('blog.post',[
             'post' => $post,
-            'categories' => $this->categories,
-            'tags' => $this->tags
         ]);
     }
 
@@ -112,7 +118,7 @@ class BlogController extends Controller
      * get category = slug and id
      * 
      */
-    public function category($id, $slug){
+    public function showDetailCategory($id, $slug){
         $category = Category::where(
                     'id', '=', $id,
                     'and',
@@ -120,7 +126,7 @@ class BlogController extends Controller
                     )
                     ->with(['posts' => function($queryPosts){
                         $queryPosts->with(['author' => function($queryAuthor){
-                            $queryAuthor->select('id','user_name');
+                            $queryAuthor->select('id','name');
                         }]);
                     }])
                     ->get()
@@ -128,24 +134,32 @@ class BlogController extends Controller
 
         return view('blog.category', [
             'posts' => $category->posts,
-            'categories' => $this->categories,
-            'tags' => $this->tags,
             'category' => $category
         ]);
     }
 
     /**
-     * Post of user
+     * Post of author
      */
-    public function user($id){
-        $user = User::find($id);
+    public function showDetailAuthor($id){
+        $user = User::find($id)->first();
 
-        return view('blog.user', [
-            'posts' => $user,
+
+        return view('blog.author', [
+            'user' => $user,
         ]);
     }
 
-    public function tag($id, $slug){
-        $posts = Tag::where('status', 1);
+    public function showDetailTag($id, $slug){
+        $tag = Tag::where(
+            'id', '=', $id,
+            'and',
+            'slug', '=', $slug
+        )
+        ->get()->first();
+
+        return view('blog.tag', [
+            'tag' => $tag,
+        ]);
     }
 }

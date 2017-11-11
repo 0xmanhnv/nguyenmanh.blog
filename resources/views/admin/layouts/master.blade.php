@@ -345,7 +345,7 @@
             </li>
             <li>
               <a href="{{ asset('admin/posts') }}">
-                <i class="fa fa-th"></i> <span>Quản lý sản phẩm</span>
+                <i class="fa fa-th"></i> <span>Quản lý bài viết</span>
                 <span class="pull-right-container">
                   <small class="label pull-right bg-green">new</small>
                 </span>

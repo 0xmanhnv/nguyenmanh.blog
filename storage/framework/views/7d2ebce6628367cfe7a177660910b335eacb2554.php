@@ -1,8 +1,13 @@
-	<meta property="og:url"           content="<?php echo e(url()->current()); ?>" />
-	<meta property="og:type"          content="" />
-	<meta property="og:title"         content="<?php if($post): ?> <?php echo e($post->title); ?> <?php endif; ?>" />
-	<meta property="og:description"   content="<?php if($post): ?> <?php echo e($post->description); ?> <?php endif; ?>" />
-	<meta property="og:image"         content="http://android.coloawap.net/wp-content/uploads/2014/01/710.png" />
+<?php $__env->startSection('title'); ?>
+	<?php if(isset($post->title)): ?> <?php echo e($post->title); ?> <?php endif; ?>
+<?php $__env->stopSection(); ?>
+
+
+<meta property="og:url"           content="<?php echo e(url()->current()); ?>" />
+<meta property="og:type"          content="" />
+<meta property="og:title"         content="<?php if($post): ?> <?php echo e($post->title); ?> <?php endif; ?>" />
+<meta property="og:description"   content="<?php if($post): ?> <?php echo e($post->description); ?> <?php endif; ?>" />
+<meta property="og:image"         content="http://android.coloawap.net/wp-content/uploads/2014/01/710.png" />
 
 
 <?php $__env->startSection('content'); ?>
@@ -32,8 +37,12 @@
 			    	</div>
 			    	<div class="share">
 			    		<h3 class="sd-title">
-			    			Tags: 
-			    			<a href="#" class="tag">Laravel</a>
+			    			Tags:
+			    			<?php $__currentLoopData = $post->tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			    				<a href="<?php echo e(url('blog/tag/'.$tag->id.'/'.$tag->slug )); ?>" class="tag">
+			    					<span><?php echo e($tag->name); ?></span>
+			    				</a>
+			    			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 			    		</h3>
 			    	</div>
 			    	<div class="share">

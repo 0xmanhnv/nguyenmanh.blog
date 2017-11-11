@@ -2,13 +2,16 @@
 
 use App\Models\Post;
 
-Route::get('test', function(){
-	$posts = Post::with('tags')->find(1);
+// Route::get('uploads', function(){
+// 	return view('admin.uploadsFile');
+// });
 
-	dd($posts);
+// Route::get('dropzone', 'HomeController@dropzone');
+Route::get('editor', function(){
+	return view("editor");
 });
 
-
+Route::post('dropzone/store', ['as'=>'dropzone.store','uses'=>'HomeController@dropzoneStore']);
 
 Route::group(['prefix' => '/'], function(){
 	Route::get('/', 'Blog\BlogController@index');
@@ -85,11 +88,14 @@ Route::group(['prefix' => 'blog'], function(){
 	/**
 	 * search
 	 */
-	Route::get('/search', 'Blog\BlogController@search')->name('search');
+	Route::get('/search', 'Blog\BlogController@showResultSearch')->name('blog.search');
 
-	Route::get('user/{id}', 'Blog\BlogController@user');
-	Route::get('{slug}/{id}', 'Blog\BlogController@post');
-	Route::get('category/{slug}/{id}', 'Blog\BlogController@category');
+	Route::get('post/{slug}/{id}', 'Blog\BlogController@showDetailPost')->name('blog.post');
+	Route::get('category/{id}/{slug}', 'Blog\BlogController@showDetailCategory')->name('blog.category');
+
+	Route::get('tag/{id}/{slug}', 'Blog\BlogController@showDetailTag');
+
+	Route::get('author/{id}', 'Blog\BlogController@showDetailAuthor')->name('blog.author');
 });
 
 
@@ -113,3 +119,7 @@ Route::group(['prefix' => 'zentgroup'], function(){
 
 	Route::post('group/{id}/feed', 'Auth\LoginFacebookController@postToGroup');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

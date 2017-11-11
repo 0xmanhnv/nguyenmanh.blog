@@ -1,3 +1,8 @@
+<?php $__env->startSection('title'); ?>
+    <?php echo e("Nguyễn Mạnh"); ?>
+
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
     <div class="col-xs-12 col-sm-8 col-md-8">
         <?php if(isset($posts)): ?>
@@ -12,7 +17,7 @@
                                     </a>
                                 </div>
                                 <div class="postMetaInline-feedSummary">
-                                    <a class="link link--darken link--accent u-accentColor--textNormal u-accentColor--textDarken u-color--link user-link" href="<?php echo e(url('blog/user/'.$post->user_id)); ?>">
+                                    <a class="link link--darken link--accent u-accentColor--textNormal u-accentColor--textDarken u-color--link user-link" href="<?php echo e(route('blog.author',[$post->user_id ])); ?>">
                                         <?php echo e($post->author); ?>
 
                                     </a>
@@ -30,13 +35,13 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <a href="<?php echo e(url('blog/'.$post->id.'/'.$post->slug)); ?>">
+                        <a href="<?php echo e(route('blog.post',[$post->id,$post->slug])); ?>">
                             <h3 class="title"><?php echo e($post->title); ?></h3>
                         </a>
                         <span>
                             <?php echo e(\Illuminate\Support\Str::words($post->description , 30, ' ...')); ?>
 
-                            <a class="see-more" href="<?php echo e(url('blog/'.$post->id.'/'.$post->slug)); ?>"> Xem thêm</a>
+                            <a class="see-more" href="<?php echo e(route('blog.post',[$post->id,$post->slug])); ?>"> Xem thêm</a>
                         </span>
                     </div>
                 </article>
@@ -48,6 +53,13 @@
         <?php endif; ?>
     </div>
     <div class="col-xs-12 col-sm-4 col-md-4">
+        
+        <div class="panel panel-custome">
+            <div class="panel-body panel-body-custome panel-body-facebook">
+                <div class="fb-page" data-href="https://www.facebook.com/tailieucntt/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/tailieucntt/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/tailieucntt/">Tài liệu chuyên nghành Công Nghệ Thông Tin</a></blockquote></div>
+            </div>
+        </div>
+        
         
          <?php if(isset($categories)): ?>
             <div class="panel panel-custome">
@@ -96,11 +108,7 @@
                 </div>
             </div>
         <?php endif; ?>
-        
-
-        
-        <?php echo $__env->yieldContent('widgets'); ?>
-        
+         
     </div>
 <?php $__env->stopSection(); ?>
 

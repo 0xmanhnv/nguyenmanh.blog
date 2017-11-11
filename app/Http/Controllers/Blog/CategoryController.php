@@ -28,7 +28,7 @@ class CategoryController extends Controller
 		    		['status', '=', 1]
 		    	])
 	    		->join('users', 'user_id', '=', 'users.id')
-	    		->select('posts.*', 'users.user_name as author')
+	    		->select('posts.*', 'users.name as author')
     			->paginate(10);
     		return view('blog.categories.posts', [
 	    		'posts' => $posts,

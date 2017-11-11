@@ -7,12 +7,12 @@
 
 <?php $__env->startSection('content'); ?>
   
-  <?php if(!is_null(Cookie::get('create_post'))): ?>
+  <?php if(!is_null(Cookie::get('success'))): ?>
     <div class="popupunder alert alert-success fade in">
       <button type="button" class="close close-sm" data-dismiss="alert">
         <i class="glyphicon glyphicon-remove"></i>
       </button>
-      <strong>Success : </strong> <?php echo e(Cookie::get('create_post')); ?>
+      <strong>Success : </strong> <?php echo e(Cookie::get('success')); ?>
 
     </div>
   <?php endif; ?>
@@ -76,14 +76,6 @@
       CKEDITOR.replace('editor-post');
       //bootstrap WYSIHTML5 - text editor
       $('.textarea').wysihtml5();
-
-      $('.popovers').popover();
-        window.setTimeout(function() {
-          $(".alert").fadeTo(2000, 500).slideUp(500, function(){
-          $(this).remove(); 
-          });
-        // 500 : Time will remain on the screen
-        }, 500);
     })
   </script>
 <?php $__env->stopSection(); ?>

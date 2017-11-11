@@ -1,3 +1,8 @@
+<?php $__env->startSection('title'); ?>
+    <?php echo e("Search || " . $tuKhoa); ?>
+
+<?php $__env->stopSection(); ?>
+
 <?php 
     function doimau($str, $tuKhoa){
         
@@ -7,7 +12,13 @@
 
 <?php $__env->startSection('content'); ?>
     <div class="col-xs-12 col-sm-8 col-md-8">
-        <div class="row well text-center "><h3>Từ khóa: <strong><?php echo e($tuKhoa); ?></strong></h3></div>
+        <div class="row well text-center ">
+            <?php if(isset($tuKhoa)): ?>
+                <h3>Từ khóa: <strong><?php echo e($tuKhoa); ?></strong></h3>
+            <?php else: ?>
+                <h4>Không có dữ liệu!</h4>
+            <?php endif; ?>
+        </div>
         <?php if(isset($posts)): ?>
             <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <article class="row article">
@@ -33,13 +44,13 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <a href="<?php echo e(url('blog/'.$post->id.'/'.$post->slug)); ?>">
+                        <a href="<?php echo e(route('blog.post',[$post->id,$post->slug])); ?>">
                             <h3 class="title"><?php echo doimau($post->title, $tuKhoa); ?></h3>
                         </a>
                         <span>
                             <?php echo doimau($post->description, $tuKhoa); ?>
 
-                            <a href="<?php echo e(url('blog/'.$post->id.'/'.$post->slug)); ?>"> Xem thêm</a>
+                            <a href="<?php echo e(route('blog.post',[$post->id,$post->slug])); ?>"> Xem thêm</a>
                         </span>
                     </div>
                 </article>

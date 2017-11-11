@@ -19,7 +19,7 @@ class AdminController extends Controller
         $countPosts = Post::where('status', 1)->count();
 
 
-    	return view(env('TEMPLATE_ADMIN').'.index',[
+    	return view('admin.index',[
             'countPosts' => (string) $countPosts,
         ]);
     }

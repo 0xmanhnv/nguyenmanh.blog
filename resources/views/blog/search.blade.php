@@ -1,5 +1,9 @@
 @extends('blog.layouts.master')
 
+@section('title')
+    {{ "Search || " . $tuKhoa }}
+@endsection
+
 <?php 
     function doimau($str, $tuKhoa){
         
@@ -9,7 +13,13 @@
 
 @section('content')
     <div class="col-xs-12 col-sm-8 col-md-8">
-        <div class="row well text-center "><h3>Từ khóa: <strong>{{ $tuKhoa }}</strong></h3></div>
+        <div class="row well text-center ">
+            @if(isset($tuKhoa))
+                <h3>Từ khóa: <strong>{{ $tuKhoa }}</strong></h3>
+            @else
+                <h4>Không có dữ liệu!</h4>
+            @endif
+        </div>
         @if(isset($posts))
             @foreach ($posts as $post)
                 <article class="row article">
@@ -33,12 +43,12 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <a href="{{ url('blog/'.$post->id.'/'.$post->slug) }}">
+                        <a href="{{ route('blog.post',[$post->id,$post->slug]) }}">
                             <h3 class="title">{!! doimau($post->title, $tuKhoa) !!}</h3>
                         </a>
                         <span>
                             {!! doimau($post->description, $tuKhoa) !!}
-                            <a href="{{ url('blog/'.$post->id.'/'.$post->slug) }}"> Xem thêm</a>
+                            <a href="{{ route('blog.post',[$post->id,$post->slug]) }}"> Xem thêm</a>
                         </span>
                     </div>
                 </article>
