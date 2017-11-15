@@ -1,6 +1,5 @@
 @extends('admin.layouts.master')
 
-
 @section('content')
 	<!-- Small boxes (Stat box) -->
   <div class="row">

@@ -36,6 +36,7 @@
     32 => 'SammyK\\LaravelFacebookSdk\\LaravelFacebookSdkServiceProvider',
     33 => 'Yajra\\DataTables\\DataTablesServiceProvider',
     34 => 'Barryvdh\\Debugbar\\ServiceProvider',
+    35 => 'Collective\\Html\\HtmlServiceProvider',
   ),
   'eager' => 
   array (

@@ -341,11 +341,14 @@ class ComposerStaticInitf44bcd664ea42f9bc8b90b48d0b28639
     );
 
     public static $classMap = array (
+        'App\\Admin' => __DIR__ . '/../..' . '/app/Admin.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
         'App\\Http\\Controllers\\Admin\\AdminCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminCategoryController.php',
-        'App\\Http\\Controllers\\Admin\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminController.php',
         'App\\Http\\Controllers\\Admin\\AdminPostController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminPostController.php',
+        'App\\Http\\Controllers\\Admin\\Auth\\AdminLoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Auth/AdminLoginController.php',
+        'App\\Http\\Controllers\\Admin\\Auth\\AdminResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Auth/AdminResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\LoginFacebookController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginFacebookController.php',
@@ -357,6 +360,7 @@ class ComposerStaticInitf44bcd664ea42f9bc8b90b48d0b28639
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\AdminAuthenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminAuthenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',

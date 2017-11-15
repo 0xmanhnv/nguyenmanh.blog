@@ -43,6 +43,7 @@
       26 => 'SammyK\\LaravelFacebookSdk\\LaravelFacebookSdkServiceProvider',
       27 => 'Yajra\\DataTables\\DataTablesServiceProvider',
       28 => 'Barryvdh\\Debugbar\\ServiceProvider',
+      29 => 'Collective\\Html\\HtmlServiceProvider',
     ),
     'aliases' => 
     array (
@@ -82,6 +83,8 @@
       'Facebook' => 'SammyK\\LaravelFacebookSdk\\FacebookFacade',
       'DataTables' => 'Yajra\\DataTables\\Facades\\DataTables',
       'Debugbar' => 'Barryvdh\\Debugbar\\Facade',
+      'Form' => 'Collective\\Html\\FormFacade',
+      'Html' => 'Collective\\Html\\HtmlFacade',
     ),
   ),
   'auth' => 
@@ -103,6 +106,11 @@
         'driver' => 'token',
         'provider' => 'users',
       ),
+      'admin' => 
+      array (
+        'driver' => 'session',
+        'provider' => 'admins',
+      ),
     ),
     'providers' => 
     array (
@@ -111,12 +119,23 @@
         'driver' => 'eloquent',
         'model' => 'App\\User',
       ),
+      'admins' => 
+      array (
+        'driver' => 'eloquent',
+        'model' => 'App\\Admin',
+      ),
     ),
     'passwords' => 
     array (
       'users' => 
       array (
         'provider' => 'users',
+        'table' => 'password_resets',
+        'expire' => 60,
+      ),
+      'admins' => 
+      array (
+        'provider' => 'admins',
         'table' => 'password_resets',
         'expire' => 60,
       ),

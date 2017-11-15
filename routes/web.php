@@ -13,14 +13,15 @@ Route::get('editor', function(){
 
 Route::post('dropzone/store', ['as'=>'dropzone.store','uses'=>'HomeController@dropzoneStore']);
 
+/**
+	 *  Admin Authentication Routes...
+	 */
+Route::get('admin/login', 'Admin\Auth\AdminLoginController@showLoginForm');
+Route::post('admin/login', 'Admin\Auth\AdminLoginController@login')->name('admin.login');
+Route::post('admin/logout', 'Admin\Auth\AdminLoginController@logout')->name('admin.logout');
+
 Route::group(['prefix' => '/'], function(){
 	Route::get('/', 'Blog\BlogController@index');
-	/**
-	 * Login
-	 */
-	Route::get('admin/login', function(){
-		return view('admin.login');
-	});
 
 	/**
 	 * contact
@@ -35,10 +36,11 @@ Route::group(['prefix' => '/'], function(){
  * /admin
  * thao tac voi quyen admin
  */
-Route::group(['prefix'=>'admin'], function(){
-	Route::get('/', 'Admin\AdminController@index');
+Route::group(['prefix'=>'admin', 'middleware' => 'admin'], function(){
+	Route::get('/', 'AdminController@index')->name('admin.index');
 
-	Route::get('posts', 'Admin\AdminController@posts');
+
+	Route::get('posts', 'AdminController@posts')->name('admin.posts');
 
 	/**
 	 * admin/post
@@ -101,24 +103,24 @@ Route::group(['prefix' => 'blog'], function(){
 
 
 
-/**
- * Facebook ***************************************************
- */
-Route::get('user', 'Auth\LoginFacebookController@postToUser');
-Route::get('friend', 'Auth\LoginFacebookController@getIdFriend');
+// /**
+//  * Facebook ***************************************************
+//  */
+// Route::get('user', 'Auth\LoginFacebookController@postToUser');
+// Route::get('friend', 'Auth\LoginFacebookController@getIdFriend');
 
-Route::group(['prefix' => 'facebook'],function(){
-	Route::get('login', 'Auth\LoginFacebookController@login');
-	Route::get('callback', 'Auth\LoginFacebookController@callback');
-});
+// Route::group(['prefix' => 'facebook'],function(){
+// 	Route::get('login', 'Auth\LoginFacebookController@login');
+// 	Route::get('callback', 'Auth\LoginFacebookController@callback');
+// });
 
-Route::group(['prefix' => 'zentgroup'], function(){
-	Route::get('/', 'Auth\LoginFacebookController@index');
-	Route::get('groups', 'Auth\LoginFacebookController@groups');
-	Route::get('{id}/members', 'Auth\LoginFacebookController@members');
+// Route::group(['prefix' => 'zentgroup'], function(){
+// 	Route::get('/', 'Auth\LoginFacebookController@index');
+// 	Route::get('groups', 'Auth\LoginFacebookController@groups');
+// 	Route::get('{id}/members', 'Auth\LoginFacebookController@members');
 
-	Route::post('group/{id}/feed', 'Auth\LoginFacebookController@postToGroup');
-});
+// 	Route::post('group/{id}/feed', 'Auth\LoginFacebookController@postToGroup');
+// });
 
 Auth::routes();
 
